@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { Button} from '@material-ui/core';
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class Question extends Component {
      viewPoll = (e, id) => {
@@ -13,7 +13,7 @@ class Question extends Component {
     }
   
   render(){
-    const {question,  display, avatar, authorName, answered, id} = this.props
+    const {question,  display, avatar, authorName, id} = this.props
     if (question === null)
             return <p>Sorry, but that poll wan't found</p>
     
@@ -23,15 +23,15 @@ class Question extends Component {
           src={avatar}
           alt=''
           className='avatar'/>
-  		<div>
-  			<p>{`${authorName} asks:`}</p>
+  <div>
+  			<p className="thick">{`${authorName} asks:`}</p>
       		<p>{`Would you rather ${question.optionOne.text} or ...`}</p>    
            
-            	<Button className="replying-to" onClick={(e) => this.viewPoll(e,
-                                    id)}>
+            	<Button  onClick={(e) => this.viewPoll(e,
+                                    id)} variant="contained" size="small">
                                     View Poll
                                 </Button>
-  		</div>      			
+                                </div>
       </div>
     )
   }
@@ -51,8 +51,7 @@ function mapStateToProps({ authedUser, users, questions }, { id, displayUnanswer
         display,
         question,
         avatar,
-        authorName,
-        answered
+        authorName       
     }
 }
 

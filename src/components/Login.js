@@ -12,12 +12,12 @@ class Login extends Component {
  }
     
   render(){
-    const { userNames} = this.props   
-    const options = userNames.map((name) => (<MenuItem  key={name} value={name} >{name}</MenuItem >))
+    const { userNames, users} = this.props   
+    const options = userNames.map((name) => (<MenuItem  key={name} value={name} >{users[name].name}</MenuItem >))
 
     return (
       <div>
-      <h3>Login</h3>
+      <h3>Sign in</h3>
       <Select 
       	onChange={this.handleChange}
 		defaultValue="DEFAULT">      

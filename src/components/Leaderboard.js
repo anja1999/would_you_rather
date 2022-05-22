@@ -1,22 +1,27 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
+import { Divider} from '@material-ui/core';
 
 class Leaderboard extends Component{
   
   render(){
     const {users} = this.props
     return(
-      <div>
+      <div className="container tab">
       { users.map((user)=>(
-      	<div key={user.name}>
-          <p>{user.name}</p>  
+      	<div key={user.name} className="question margin">         
           <img
             src={user.avatar}
             alt=''
             className='avatar'/>
-           <p>{`Asked question: ${user.askedQuestions}`}</p> 
-           <p>{`Answered questions: ${user.userAnswers}`}</p>  
-           <p>{`Total: ${user.score}`}</p>     
+   		   <p className="thick third">{user.name}</p>  
+          <div>	
+            	<p>{`Asked questions: ${user.askedQuestions}`}</p> 
+                  <Divider />
+                  <p>{`Answered questions: ${user.userAnswers}`}</p>  
+                    <Divider />
+                   <p className="thick">{`Total: ${user.score}`}</p>   
+          </div>             
           </div>
     	))}
       </div>
@@ -27,7 +32,6 @@ class Leaderboard extends Component{
 
 function getUserDetails(user){
   var userAnswers = Object.keys(user.answers).length 
-  {/*todo fix count*/}
   var askedQuestions =  user.questions.length;
   return {
     name: user.name,

@@ -4,6 +4,7 @@ import {removeAuthedUser} from '../actions/authedUser'
 import { NavLink } from 'react-router-dom'
 import { Button} from '@material-ui/core';
 
+
 class Nav extends Component {
   handleLogOut =(e)=>{
     e.preventDefault()
@@ -34,13 +35,16 @@ class Nav extends Component {
           </NavLink>
         </li>
     <li  >{ display &&
-       <div className="right" >
-      			<span> Welcome, {authedUser.user.name}</span>
+       <div>     			
             	<img
-                src={authedUser.user.avatarURL}
-                alt=''
-                className='avatar'/>
-          		<Button onClick={this.handleLogOut}>Logout</Button>
+                  src={authedUser.user.avatarURL}
+                  alt=''
+                  className='avatar avatarLogo'/>
+  				<span className="thick"> Welcome, {authedUser.user.name}</span>
+          		<Button 
+					onClick={this.handleLogOut} 
+					variant="outlined" 
+					size="small">Logout</Button>
         </div>
       }
    

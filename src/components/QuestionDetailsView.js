@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import AnswerQuestionView from './AnswerQuestionView'
+import { Divider, LinearProgress } from '@material-ui/core';
+
 
 class QuestionDetailsView extends Component{ 
   render(){
@@ -33,23 +35,27 @@ function Details(props){
   const {question, avatar, authorName, answeredOptionObj} = props  
   const stats = getTotalVotes(question)
   return (
-    <div  className="questionView">
-	  <span>Asked by: </span>      
-      <span>{authorName}</span>
-	  <img
+    <div  className="question margin">
+    <img
           src={avatar}
           alt=''
           className='avatar'/>
-      <p>Results : </p>
-      <p>{`Answered by user: ${question[answeredOptionObj].text}`}</p>
-	  <span>Total votes:</span>
-      <span>{stats.total}</span> 
-      <p>{question.optionOne.text}</p>
- 	  <p>{stats.optionOneVotes}</p>
- 	  <p>{stats.optionOnePercent}</p><span>%</span>
-      <p>{question.optionTwo.text}</p>
- 	  <p>{stats.optionTwoVotes}</p> 
-      <p>{stats.optionTwoPercent}</p><span>%</span>
+      <p className="thick third">Asked by {authorName}</p>	
+          <div className="wide">
+          <p>Your vote : {question[answeredOptionObj].text}</p>
+ 		  <Divider />
+          <p className="thick">Results:</p>
+          <p>Total votes: {stats.total}</p>
+          <Divider />
+          <p className={question[answeredOptionObj] === question.optionOne ? "thick color":""}>Would you rather {question.optionOne.text} ? </p>
+          <p>Votes : {stats.optionOneVotes}</p>
+          <p>{stats.optionOnePercent} %</p>
+		  <LinearProgress variant="determinate" value={stats.optionOnePercent} />
+          <p className={question[answeredOptionObj] === question.optionTwo ? "thick color":"" }>Would you rather {question.optionTwo.text}? </p>
+          <p>Votes : {stats.optionTwoVotes}</p> 
+          <p>{stats.optionTwoPercent} %</p>
+		  <LinearProgress variant="determinate" value={stats.optionTwoPercent} />
+        </div>
       </div>
   )
 }

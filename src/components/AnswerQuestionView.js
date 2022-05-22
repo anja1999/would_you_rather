@@ -34,19 +34,19 @@ class AnswerQuestionView extends Component{
       const { answeredOption } = this.state
        console.log( "after render ",answeredOption )
       return (
-        <div className="questionView">
+        <div className="question">
         <img
           src={avatar}
           alt=''
           className='avatar'/>
-  		<h2>{authorName}</h2> 	 
+  		<p className="thick third">{authorName} asks: </p> 	 
        <FormControl component="fieldset">
-            <FormLabel component="legend">Would you rather ?</FormLabel>
+            <FormLabel component="legend">Would you rather ...</FormLabel>
             <RadioGroup aria-label="wur" name="wur" value={answeredOption} onChange={this.handleRadioChange}>
               <FormControlLabel value={question.optionOne.text} control={<Radio />} label={question.optionOne.text} />
               <FormControlLabel value={question.optionTwo.text} control={<Radio />} label={question.optionTwo.text} />
             </RadioGroup>
-		<Button onClick={this.submitPoll}>Submit</Button> 
+		<Button onClick={this.submitPoll} variant="contained" size="small">Submit</Button> 
        </FormControl>
         </div>
       )

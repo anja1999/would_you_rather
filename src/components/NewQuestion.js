@@ -41,12 +41,12 @@ class NewQuestion extends Component {
             return <Redirect to='/'/>
         }
     return (
-      <div className="container">
+      <div className="container tab">
       <h1>Create new question</h1>
       <p> Complete question : </p>
       <h2>Would you rather ...</h2>
-      <form onSubmit = {this.handleSubmit}>
-		<TextareaAutosize
+      <form onSubmit = {this.handleSubmit} className="new-question">
+		<TextareaAutosize className="centered"
           aria-label="empty textarea"
           placeholder="Enter question one text here "
           value={optionOneText}
@@ -54,14 +54,21 @@ class NewQuestion extends Component {
 		  onChange={this.handleOptionOneChange}
         />
 		<p>OR</p>
-		<TextareaAutosize
+		<TextareaAutosize className="centered"
           aria-label="empty textarea"
           placeholder="Enter question two text here "
           value={optionTwoText}
           style={{ width: 400 }}
 		  onChange={this.handleOptionTwoChange}
 		/>
-      <Button type="submit" disabled={optionOneText === "" || optionTwoText === ""}>Submit</Button>
+		<div className="submit" >
+		<Button 
+			type="submit" 			
+			disabled={optionOneText === "" || optionTwoText === ""} 
+			variant="contained" 
+			size="small">Submit</Button>
+		</div>
+      
       </form>      
       </div>
     )
