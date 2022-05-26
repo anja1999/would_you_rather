@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { Divider} from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 class Leaderboard extends Component{
   
@@ -49,4 +50,7 @@ function mapStateToProps ({users}) {
   }
 }
 
+Leaderboard.propTypes = {
+	users : PropTypes.array.isRequired
+}
 export default connect(mapStateToProps)(Leaderboard)

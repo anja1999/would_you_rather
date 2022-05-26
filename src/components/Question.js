@@ -1,19 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import {connect} from "react-redux";
 import { Button} from '@material-ui/core';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-class Question extends Component {
-     viewPoll = (e, id) => {
-        e.preventDefault()
-       console.log(id)
-       console.log(this.props.history)      
-       
-      this.props.history.push(`/question/${id}`)
-    }
+function Question(props) {
+  function  viewPoll(e, id){
+      e.preventDefault()
+      props.history.push(`/question/${id}`)
+    };
   
-  render(){
-    const {question,  display, avatar, authorName, id} = this.props
+
+    const {question,  display, avatar, authorName, id} =props
     if (question === null)
             return <p>Sorry, but that poll wan't found</p>
     
@@ -23,18 +21,16 @@ class Question extends Component {
           src={avatar}
           alt=''
           className='avatar'/>
-  <div>
-  			<p className="thick">{`${authorName} asks:`}</p>
-      		<p>{`Would you rather ${question.optionOne.text} or ...`}</p>    
-           
-            	<Button  onClick={(e) => this.viewPoll(e,
-                                    id)} variant="contained" size="small">
-                                    View Poll
-                                </Button>
-                                </div>
+          <div>
+              <p className="thick">{`${authorName} asks:`}</p>
+              <p>{`Would you rather ${question.optionOne.text} or ...`}</p>
+              <Button  onClick={(e) => viewPoll(e,id)} 
+                  variant="contained" 
+                  size="small">View Poll</Button>
+           </div>
       </div>
     )
-  }
+  
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id, displayUnanswered }) {  
@@ -53,6 +49,14 @@ function mapStateToProps({ authedUser, users, questions }, { id, displayUnanswer
         avatar,
         authorName       
     }
+}
+
+Question.propTypes = {
+	id : PropTypes.string.isRequired,
+    display : PropTypes.bool.isRequired,
+    question: PropTypes.object.isRequired,
+    avatar:PropTypes.string.isRequired,
+    authorName:PropTypes.string.isRequired      
 }
 
 export default withRouter(connect(mapStateToProps)(Question))

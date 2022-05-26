@@ -15,7 +15,6 @@ class AnswerQuestionView extends Component{
        this.setState(() => ({
             answeredOption
         }))
-     console.log( "new state",answeredOption)  
    } 
   
    submitPoll = (event)=>{
@@ -32,7 +31,6 @@ class AnswerQuestionView extends Component{
    render(){
       const {question, avatar, authorName} = this.props
       const { answeredOption } = this.state
-       console.log( "after render ",answeredOption )
       return (
         <div className="question">
         <img
